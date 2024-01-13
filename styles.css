@@ -200,6 +200,10 @@ footer {
     
 }
 
+.tabs {
+    margin-top: 20px;
+}
+
 
 .hide {
     display: none;

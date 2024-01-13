@@ -47,6 +47,8 @@ function renderMovies(movies = []) {
         acc[curr.title] = true;
         return acc;
     },{});
+    document.querySelector('.search-bar').classList.remove('hide');
+    document.querySelector('.sorting-options').classList.remove('hide');
     pagination.classList.remove('hide');
 
 
@@ -293,6 +295,8 @@ pagination = document.querySelector('.pagination');
 
 function renderFavMovies() {
     movieList.innerHTML = "";
+    document.querySelector('.search-bar').classList.add('hide');
+    document.querySelector('.sorting-options').classList.add('hide');
     pagination.classList.add('hide');
 
     const favMovies = getFavMoviesFromLocalStorage();
