@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="#">
+            <h1>Movie Counter</h1>
+        </a>
+        <img src="https://media.tenor.com/72BYhtJbZTUAAAAi/kstr-kochstrasse.gif" alt="reel"/>
+    </header>
 
+    <div class="search-bar">
+        <input
+        type="search"
+        id="search-input"
+        placeholder="Search by name..."
+        autocomplete="off"
+        />
+        <button id="search-button">Search</button>
+    </div>
+
+    <div class="sorting-options">
+        <button id="sort-by-date">Sort by date (Oldest to Latest)</button>
+        <button id="sort-by-rating">Sort by rating (Lowest to Highest)</button>
+    </div>
+
+    <div class="tabs">
+        <button id="all-tab" class="active-tab">All</button>
+        <button id="favorites-tab">Favorites</button>
+    </div>
+    
+    <div class="movies-list-pagination">
+        <ul id="movies-list">
+            <li class="card">
+                <img
+                class="poster"
+                src="https://image.tmdb.org/t/p/original//6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg"
+                alt="The Lord of the Rings: The Fellowship of the Ring"
+                />
+                <p class="title">The Lord of the Rings</p>
+                <section class="vote-fav">
+                    <section>
+                        <p>Votes: 22873</p>
+                        <p>Rating: 8.4</p>
+                    </section>
+                    <i class="fa-regular fa-heart fa-2x1 fav-icon"></i>
+                </section>
+            </li>
+        </ul>
+
+        <div class="pagination">
+            <button id="prev-button">Previous</button>
+            <span id="current-button"><span id="currPage">1</span> of <span id="totalPage">1</span></span>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Movie Counter</p>
+    </footer>
+
+    <script
+    src="https://kit.fontawesome.com/68129f478c.js"
+    crossorigin="anonymous">
+    </script>
+    <script src="app.js" defer></script>
+
+
+</body>
+</html>
