@@ -368,7 +368,7 @@ function renderFavMovies() {
                               </section>
                            </section>
                             
-                            <i mInfo='${mInfo}' class="fa-regular fa-heart fa-2xl fav-icon fa-solid"></i>`
+                            <i mInfo='${mInfo}' class="fa-regular fa-heart fa-2xl fav-icon"></i>`
                             
         
 
