@@ -269,6 +269,7 @@ function onSearchChange(event) {
         searchMovies();
     }else {
         fetchMovies();
+        
     }
 
 
