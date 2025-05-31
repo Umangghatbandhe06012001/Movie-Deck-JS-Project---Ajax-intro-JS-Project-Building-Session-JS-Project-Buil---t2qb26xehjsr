@@ -122,7 +122,7 @@ footer {
 
 
 .card {
-    width: 250px;
+    width: 270px;
     height: 450px;
     border: 1px solid #333;
     margin: 10px;
@@ -209,3 +209,33 @@ footer {
     display: none;
 }
 
+.tabsInnerWrapper{
+   width: 100%;
+  display: flex;
+  justify-content: stretch;
+  margin-left: 90px;
+  gap: 15px;
+}
+
+
+
+.loading-spinner {
+  text-align: center;
+  padding: 40px 0;
+  list-style: none;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db; /* Blue color */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -11,6 +11,21 @@ let currentPage = document.getElementById('currPage');
 
 
 
+function showLoading() {
+    movieList.innerHTML = `
+        <li class="loading-spinner">
+            <div class="spinner"></div>
+        </li>
+    `;
+}
+
+function hideLoading() {
+    movieList.innerHTML = ""; // Clear it before rendering actual movies
+}
+
+
+
+
 function getFavMoviesFromLocalStorage() {
     const favMovies = JSON.parse(localStorage.getItem("favouriteMovies"));
     return favMovies === null ? [] : favMovies;
@@ -40,17 +55,21 @@ function removeFavMoviesFromLocalStorage(mInfo) {
 
 //step 2
 
+
+
+
 function renderMovies(movies = []) {
-    movieList.innerHTML = "";
+    hideLoading(); // ⬅️ Clear the loading message
+
     const favMovies = getFavMoviesFromLocalStorage();
     const favMoviesMapping = favMovies.reduce((acc, curr) => {
         acc[curr.title] = true;
         return acc;
     },{});
+
     document.querySelector('.search-bar').classList.remove('hide');
     document.querySelector('.sorting-options').classList.remove('hide');
     pagination.classList.remove('hide');
-
 
     movies.forEach((eMovie) => {
         const { poster_path, title, vote_average, vote_count } = eMovie;
@@ -98,15 +117,31 @@ function renderMovies(movies = []) {
 
         movieList.appendChild(listItem);
     });
-
 }
+
+// function renderMovies(movies = []) {
+//     movieList.innerHTML = "";
+//     const favMovies = getFavMoviesFromLocalStorage();
+//     const favMoviesMapping = favMovies.reduce((acc, curr) => {
+//         acc[curr.title] = true;
+//         return acc;
+//     },{});
+//     document.querySelector('.search-bar').classList.remove('hide');
+//     document.querySelector('.sorting-options').classList.remove('hide');
+//     pagination.classList.remove('hide');
+
+
+    
+
+// }
 
 
 //step 1 
 async function fetchMovies() {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKEY}&language=en-US&page=${curr_page}`);
+        showLoading(); // ⬅️ Add this line
 
+        const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKEY}&language=en-US&page=${curr_page}`);
         let data = await response.json();
         movies = data.results;
         totalPages = data.total_pages;
@@ -116,11 +151,13 @@ async function fetchMovies() {
         if(totalPages > 1) nextBtn.disabled = false;
         else nextBtn.disabled = true;
 
-        renderMovies(movies);
+        renderMovies(movies); // This will call `hideLoading` automatically
     } catch (error) {
         console.log(error);
+        movieList.innerHTML = `<li class="error">Failed to load movies</li>`;
     }
 }
+
 
 fetchMovies();
 
@@ -183,6 +220,7 @@ nextBtn.addEventListener("click", navigateToNext);
 prevBtn.disabled = true;
 
 async function searchMovies() {
+    showLoading(); // ⬅️ Add this line
 
     const searchText = searchInput.value;
     const url = `https://api.themoviedb.org/3/search/movie?query=${searchText}&api_key=${APIKEY}&language=en-US&page=${curr_page}`;
@@ -193,9 +231,10 @@ async function searchMovies() {
     movies = data.results;
     totalPages = data.total_pages;
     tpage.innerHTML = totalPages;
-    movieList.innerHTML = "";
-    renderMovies(movies);
+
+    renderMovies(movies); // This will call `hideLoading` automatically
 }
+
 
 let sortByDateFlag = 0;
 const sortByDateBtn = document.getElementById('sort-by-date');
